@@ -1,0 +1,49 @@
+Eric-（丹巴亚霈） 6-18 13:51:42
+氡气传感器测试注意事项
+
+
+a）复位引脚是从外部控制系统操作/暂停的功能。（高电平正常工作，低电平暂停）请应用传感器电源，并从外部控制为高电平。
+
+b）更改为0xC10x01是正常引导
+
+C)在传感器初始启动期间，0x1A寄存器的位【7:6】总是读取为1,1， 代表传感器读取正常
+
+1- 传感器测试期间需要站立，不可以斜躺
+2- 传感器读取正确数据时间，需要开机上电1个小时后
+3- 测试环境12v，35mA
+4- 注意IIC时序
+
+
+1.        need to know the sequence diagram of reading memory for the radon module. 
+模组IIC读写寄存器的时序图；
+
+A: 数据将按照协议中规定的传感器行为顺序自动更新到每个寄存器。 内存读取没有固定的顺序。 通电后，您可以随时访问该寄存器以检索数据。 但是，如果状态中的Sensor Status和I2C Status不正常 传感器工作不正常，或每个寄存器都在更新内存，因此数据不可靠。 因此，每次读取时，您都可以检查是否为正常状态，然后读取数据。 或者，一次读取多个字节，读取Address 0x00-0x1A，仅处理状态为正常时的数据。  
+
+2. how is the shortest time for the RESET signal of high level? RESET
+复位信号高电平最短时间多少？ 
+A: 复位销用于控制系统在外部的运动/暂停。（高正常运行，低暂停） 不用于重置传感器系统。 传感器接通电源后，请从外部控制到High
+
+3. ICC is standard sequence? What’s maximum speed rate? 
+IIC是否标准时序？IIC最大速率是多少？ 
+A: 支持高达400Kbps，但RANO产品用作显示板和100Kbps。 由于已在100Kbps上验证，建议使用100Kbps以下
+
+4. Is the same process for the power on and reset ? 每次上电或者复位流程是否一样？ 
+A: 请参考2号
+
+Eric-（丹巴亚霈） 6-18 13:52:41
+[文件：PM04_Datasheet_V3.0.1(1).pdf]
+
+Eric-（丹巴亚霈） 6-18 13:52:42
+[文件：Radon Sensor Communication Protocol(20210913).pdf]
+
+Eric-（丹巴亚霈） 6-18 13:52:43
+[文件：SensorRead.c]
+
+Eric-（丹巴亚霈） 6-18 13:52:45
+[文件：stm32l1xx_hal_i2c (1).h]
+
+Eric-（丹巴亚霈） 6-18 13:52:46
+[文件：stm32l1xx_hal_i2c.c]
+
+Eric-（丹巴亚霈） 6-18 13:52:57
+@Joy @李 以上为氡气模组资料
