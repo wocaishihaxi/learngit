@@ -10,3 +10,6 @@ Switched to a new branch 'friend: by devc'
 云端更改一下：我想知道rebase到底干嘛子
 Switched to a new branch 'by dev c'
 hellow，继续更改代码，刚刚改完了，现在继续修订代码，哦，对，我还没哟把云端的pull下来，哈哈哈哈
+好家伙，我又来了，这次先rebase，然后提交
+
+
